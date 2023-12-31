@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Toggle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Dark Mode Toggle</h1>
+    <label>
+        <input type="checkbox" id="darkModeToggle"> Dark Mode
+    </label>
+
+    <script>
+        // Retrieve user settings from localStorage
+        const storedSettings = JSON.parse(localStorage.getItem('userSettings')) || {};
+
+        // Apply dark mode setting if available
+        if (storedSettings.darkMode) {
+            document.body.classList.add('dark-mode');
+            document.getElementById('darkModeToggle').checked = true;
+        }
+
+        // Toggle dark mode when the checkbox is clicked
+        document.getElementById('darkModeToggle').addEventListener('change', function () {
+            // Update the user settings
+            const userSettings = {
+                darkMode: this.checked,
+            };
+
+            // Apply dark mode styles
+            if (userSettings.darkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+
+            // Store the updated settings in localStorage
+            localStorage.setItem('userSettings', JSON.stringify(userSettings));
+        });
+    </script>
+
+</body>
+
+</html>
